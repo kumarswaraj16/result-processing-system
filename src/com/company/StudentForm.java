@@ -14,7 +14,7 @@ import java.util.Vector;
 public class StudentForm extends JFrame {
     JLabel lblSearchStudent,lblProgramId,lblEnrollNo,lblStudentName,lblCurrentSemester,lblMotherName,lblFatherName,lblDepartmentCode,lblAdmissionYear;
     JTextField txtSearchStudent,txtProgramId,txtEnrollNo,txtStudentName,txtCurrentSemester,txtMotherName,txtFatherName,txtDepartmentCode,txtAdmissionYear;
-    JButton add,update,show,search;
+    JButton add,update,show,search,reset,enterMarks;
     JTable jTable;
     Container c;
 
@@ -102,6 +102,63 @@ public class StudentForm extends JFrame {
         show.setFont(new Font("Arial",Font.BOLD,17));
         show.setBounds(950,650,200,40);
         c.add(show);
+        enterMarks = new JButton("Enter/Update Marks  ➡");
+        enterMarks.setFont(new Font("Arial",Font.BOLD,17));
+        enterMarks.setBounds(1170,720,250,40);
+        c.add(enterMarks);
+        reset = new JButton("Reset Details");
+        reset.setFont(new Font("Arial",Font.BOLD,17));
+        reset.setBounds(15,720,200,40);
+        c.add(reset);
+
+        reset.addActionListener(e -> {
+            txtProgramId.setText(null);
+            txtEnrollNo.setText(null);
+            txtStudentName.setText(null);
+            txtCurrentSemester.setText(null);
+            txtMotherName.setText(null);
+            txtFatherName.setText(null);
+            txtDepartmentCode.setText(null);
+            txtAdmissionYear.setText(null);
+        });
+
+        enterMarks.addActionListener(e -> {
+            try{
+                Vector<Integer> thv = new Vector<>();
+                Vector<Integer> prv = new Vector<>();
+                Vector<Integer> mtv = new Vector<>();
+                String programId = txtProgramId.getText();
+                String enrollmentNumber = txtEnrollNo.getText();
+                String departmentCode = txtDepartmentCode.getText();
+                int semester = Integer.parseInt(txtCurrentSemester.getText());
+                int admissionYear = Integer.parseInt(txtAdmissionYear.getText());
+
+                PreparedStatement stmt = Main.con.prepareStatement("select * from marks where enroll_no=? and semester=? and dept_code=?");
+                stmt.setString(1,enrollmentNumber);
+                stmt.setInt(2,semester);
+                stmt.setString(3,departmentCode);
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                    int theory,practical,mt;
+                    theory = rs.getInt(7);
+                    practical = rs.getInt(8);
+                    mt = rs.getInt(9);
+                    thv.add(theory);
+                    prv.add(practical);
+                    mtv.add(mt);
+                }
+
+                MarksForm mf = new MarksForm(programId,enrollmentNumber,departmentCode,semester,admissionYear,thv,prv,mtv);
+                mf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                mf.setBounds(0,0,1500,1000);
+                mf.setVisible(true);
+
+            }catch (NumberFormatException ne){
+                JOptionPane.showMessageDialog(null, "To Enter Marks first fill the student's form!");
+            }catch (SQLException se){
+                se.printStackTrace();
+            }
+        });
 
         add.addActionListener(e -> {
             String programId = txtProgramId.getText();
@@ -133,14 +190,6 @@ public class StudentForm extends JFrame {
                 e1.printStackTrace();
             }
 
-            txtProgramId.setText(null);
-            txtEnrollNo.setText(null);
-            txtStudentName.setText(null);
-            txtCurrentSemester.setText(null);
-            txtMotherName.setText(null);
-            txtFatherName.setText(null);
-            txtDepartmentCode.setText(null);
-            txtAdmissionYear.setText(null);
         });
 
         update.addActionListener(e -> {
