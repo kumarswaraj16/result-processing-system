@@ -47,7 +47,7 @@ public class MarksForm extends JFrame {
                 creditPr.add(rs.getInt(8));
                 maxMT.add(rs.getInt(9));
             }
-            int lblX=200,lblY=50,txtX=370,txtY=90,i=0,thX=300,thY=90;
+            int lblX=200,lblY=80,txtX=370,txtY=120,i=0,thX=300,thY=120;
             JTextField txtTheoryMarks,txtPracticalMarks,txtMidTermMarks;
             JLabel lblCourseDetails,lblTh,lblPr,lblMt;
             for(String cn:courseName){
@@ -91,9 +91,9 @@ public class MarksForm extends JFrame {
                 }
                 midtermMarks.add(txtMidTermMarks);
                 c.add(txtMidTermMarks);
-                txtY=txtY+100;
-                lblY=lblY+100;
-                thY=thY+100;
+                txtY=txtY+80;
+                lblY=lblY+80;
+                thY=thY+80;
                 i++;
             }
         } catch (SQLException e1) {

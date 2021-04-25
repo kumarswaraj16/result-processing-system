@@ -167,7 +167,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX,lblY,100,40);
             c.add(cn);
-            lblY=lblY+50;
+            lblY=lblY+45;
         }
 
         lblCourseName = new JLabel("Title of the Course");
@@ -181,7 +181,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX1,lblY1,400,40);
             c.add(cn);
-            lblY1=lblY1+50;
+            lblY1=lblY1+45;
         }
 
         lblCreditHours = new JLabel("Credit Hours");
@@ -203,7 +203,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX2,lblY2,400,40);
             c.add(cn);
-            lblY2=lblY2+50;
+            lblY2=lblY2+45;
         }
 
         int lblX3=678,lblY3=300;
@@ -212,7 +212,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX3,lblY3,400,40);
             c.add(cn);
-            lblY3=lblY3+50;
+            lblY3=lblY3+45;
         }
 
         lblMarksObtained = new JLabel("Marks Obtained");
@@ -246,7 +246,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX4,lblY4,40,40);
             c.add(cn);
-            lblY4=lblY4+50;
+            lblY4=lblY4+45;
         }
 
         int lblX5=865,lblY5=300;
@@ -259,7 +259,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX5,lblY5,40,40);
             c.add(cn);
-            lblY5=lblY5+50;
+            lblY5=lblY5+45;
         }
 
         int lblX6=915,lblY6=300;
@@ -272,7 +272,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX6,lblY6,40,40);
             c.add(cn);
-            lblY6=lblY6+50;
+            lblY6=lblY6+45;
         }
 
         int lblX7=975,lblY7=300;
@@ -285,7 +285,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX7,lblY7,40,40);
             c.add(cn);
-            lblY7=lblY7+50;
+            lblY7=lblY7+45;
         }
 
         lblGradePoint = new JLabel("Grade Point");
@@ -299,7 +299,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX8,lblY8,100,40);
             c.add(cn);
-            lblY8=lblY8+50;
+            lblY8=lblY8+45;
         }
 
         lblCreditPoints = new JLabel("Credit Points");
@@ -328,7 +328,7 @@ public class ResultDesign extends JFrame {
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX9,lblY9,100,40);
             c.add(cn);
-            lblY9=lblY9+50;
+            lblY9=lblY9+45;
             j++;
         }
 
@@ -357,6 +357,7 @@ public class ResultDesign extends JFrame {
         lblOTch.setBounds(640,700,100,40);
         c.add(lblOTch);
 
+        totalCreditPointsTillSemester = Double.parseDouble(String.format("%.1f",(totalCreditPointsTillSemester)));
         JLabel lblOTcp = new JLabel(String.valueOf(totalCreditPointsTillSemester));
         lblOTcp.setFont(new Font("Arial",Font.BOLD,20));
         lblOTcp.setBounds(1310,700,100,40);

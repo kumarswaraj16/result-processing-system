@@ -114,6 +114,21 @@ public class StudentResult extends JFrame {
                     totalCreditHoursTillSemester = rs3.getInt(8);
                 }
 
+                totalCreditHoursTillSemester = totalCreditHoursTillSemester+totalCreditHours;
+                totalCreditPointsTillSemester = totalCreditPointsTillSemester+totalCreditPoints;
+
+                PreparedStatement stmt4 = Main.con.prepareStatement("select semester,total_credit_hours,total_credit_points from result where enroll_no=?");
+                stmt4.setString(1,enrollmentNumber);
+                ResultSet rs4 = stmt4.executeQuery();
+                while(rs4.next()){
+                    if(rs4.getInt(1)<semester){
+                        totalCreditHoursTillSemester += rs4.getInt(2);
+                        totalCreditPointsTillSemester += rs4.getDouble(3);
+                    }
+                }
+
+                ogpa = Double.parseDouble(String.format("%.2f",(totalCreditPointsTillSemester/totalCreditHoursTillSemester)));
+
                 if(rollNo==0){
                     JOptionPane.showMessageDialog(null, "For this Student, Please Insert the Result First!");
                     return;
