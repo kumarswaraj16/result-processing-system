@@ -115,7 +115,7 @@ public class StudentForm extends JFrame {
         showResult.setFont(new Font("Arial",Font.BOLD,17));
         showResult.setBounds(700,720,300,40);
         c.add(showResult);
-        addResult = new JButton("Add Result");
+        addResult = new JButton("Add/Update Result");
         addResult.setFont(new Font("Arial",Font.BOLD,17));
         addResult.setBounds(400,720,300,40);
         c.add(addResult);
