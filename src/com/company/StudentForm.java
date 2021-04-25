@@ -14,7 +14,7 @@ import java.util.Vector;
 public class StudentForm extends JFrame {
     JLabel lblSearchStudent,lblProgramId,lblEnrollNo,lblStudentName,lblCurrentSemester,lblMotherName,lblFatherName,lblDepartmentCode,lblAdmissionYear;
     JTextField txtSearchStudent,txtProgramId,txtEnrollNo,txtStudentName,txtCurrentSemester,txtMotherName,txtFatherName,txtDepartmentCode,txtAdmissionYear;
-    JButton add,update,show,search,reset,enterMarks;
+    JButton add,update,show,search,reset,enterMarks,showResult,addResult;
     JTable jTable;
     Container c;
 
@@ -110,6 +110,27 @@ public class StudentForm extends JFrame {
         reset.setFont(new Font("Arial",Font.BOLD,17));
         reset.setBounds(15,720,200,40);
         c.add(reset);
+
+        showResult = new JButton("Search Result");
+        showResult.setFont(new Font("Arial",Font.BOLD,17));
+        showResult.setBounds(700,720,300,40);
+        c.add(showResult);
+        addResult = new JButton("Add Result");
+        addResult.setFont(new Font("Arial",Font.BOLD,17));
+        addResult.setBounds(400,720,300,40);
+        c.add(addResult);
+
+        addResult.addActionListener(e -> {
+            ResultForm rf = new ResultForm();
+            rf.setVisible(true);
+            rf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        });
+
+        showResult.addActionListener(e -> {
+            StudentResult sr = new StudentResult();
+            sr.setVisible(true);
+            sr.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        });
 
         reset.addActionListener(e -> {
             txtProgramId.setText(null);
