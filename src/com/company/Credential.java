@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class Credential extends JFrame{
     String emailId;
     char[] password;
-    String role;
+    String role="Noting",email="Nothing",pass="Nothing";
     JTextField txtMail;
     JPasswordField txtPassword;
     JLabel lblMail,lblPassword,lbl;
@@ -59,12 +59,29 @@ public class Credential extends JFrame{
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
                     role = rs.getString(3);
+                    pass = rs.getString(2);
+                    email = rs.getString(1);
+                }
+                if(!email.equals(emailId)){
+                    JOptionPane.showMessageDialog(null,"User not found!");
+                    return;
+                }
+                char[] temp = pass.toCharArray();
+                if(password.length!=pass.length()){
+                    JOptionPane.showMessageDialog(null,"User not found!");
+                    return;
+                }
+                for(int i=0;i<pass.length();i++){
+                    if(temp[i]!=password[i]){
+                        JOptionPane.showMessageDialog(null,"User not found!");
+                        return;
+                    }
                 }
                 if(role.equals("admin")){
                     StudentForm sf = new StudentForm();
                     sf.setVisible(true);
                     sf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                }else{
+                }else if(role.equals("student")){
                     StudentResult sr = new StudentResult();
                     sr.setVisible(true);
                     sr.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

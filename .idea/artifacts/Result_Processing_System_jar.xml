@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Result Processing System:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Result_Processing_System_jar</output-path>
+    <root id="archive" name="Result Processing System.jar">
+      <element id="module-output" name="Result Processing System" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Downloads/postgresql-42.2.18.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

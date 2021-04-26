@@ -18,7 +18,7 @@ public class StudentResult extends JFrame {
         setBounds(200,200,1100,200);
         c = getContentPane();
         c.setLayout(null);
-        lbl = new JLabel("Search Student's Result : ");
+        lbl = new JLabel("Search Your Result : ");
         lbl.setFont(new Font("Arial",Font.BOLD,17));
         lbl.setBounds(10,10,300,40);
         c.add(lbl);
