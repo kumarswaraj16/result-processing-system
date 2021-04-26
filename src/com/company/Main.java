@@ -31,9 +31,10 @@ public class Main {
             System.exit(0);
         }
 
-        StudentForm sf = new StudentForm();
-        sf.setVisible(true);
-        sf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+          Credential credential = new Credential();
+          credential.setVisible(true);
+          credential.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 }
 
