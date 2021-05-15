@@ -60,6 +60,12 @@ public class ResultForm extends JFrame {
         c.add(reset);
 
         submit.addActionListener(e -> {
+
+            if(txtProgramId.getText().equals("") || txtEnrollmentNumber.getText().equals("") || txtRollNumber.getText().equals("") || txtSemester.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Some fields are empty!");
+                return;
+            }
+
             String programId = txtProgramId.getText();
             String enrollmentNumber = txtEnrollmentNumber.getText();
             int semester = Integer.parseInt(txtSemester.getText());

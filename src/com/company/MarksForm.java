@@ -128,6 +128,10 @@ public class MarksForm extends JFrame {
             update.setEnabled(false);
         }
 
+        if(theoryMarks.size()==0 && practicalMarks.size()==0 && midtermMarks.size()==0){
+            finish();
+        }
+
         submit.addActionListener(e -> {
             int temp = (semester+1)/2;
             String acd_session = (admissionYear + temp - 1) +"-"+ (admissionYear + temp);
@@ -256,5 +260,11 @@ public class MarksForm extends JFrame {
                 }
             }
         });
+    }
+
+    public void finish(){
+        JOptionPane.showMessageDialog(null,"Semester has not done yet!");
+        submit.setEnabled(false);
+        update.setEnabled(false);
     }
 }

@@ -182,6 +182,12 @@ public class StudentForm extends JFrame {
         });
 
         add.addActionListener(e -> {
+
+            if(txtProgramId.getText().equals("") || txtEnrollNo.getText().equals("") || txtStudentName.getText().equals("") || txtFatherName.getText().equals("") || txtAdmissionYear.getText().equals("") || txtMotherName.getText().equals("") || txtCurrentSemester.getText().equals("") || txtDepartmentCode.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Some fields are empty!");
+                return;
+            }
+
             String programId = txtProgramId.getText();
             String enrollNo = txtEnrollNo.getText();
             String studentName = txtStudentName.getText();
@@ -192,6 +198,13 @@ public class StudentForm extends JFrame {
             int admissionYear = Integer.parseInt(txtAdmissionYear.getText());
 
             try{
+                PreparedStatement stmt1 = Main.con.prepareStatement("select * from student where enroll_no = ?");
+                stmt1.setString(1,enrollNo);
+                ResultSet rs = stmt1.executeQuery();
+                if(rs.next()){
+                    JOptionPane.showMessageDialog(null,"Student Already Exists!");
+                    return;
+                }
                 PreparedStatement stmt = Main.con.prepareStatement("insert into student values(?,?,?,?,?,?,?,?,?)");
                 stmt.setString(1,programId);
                 stmt.setString(2,enrollNo);
@@ -273,6 +286,12 @@ public class StudentForm extends JFrame {
         });
 
         search.addActionListener(e -> {
+
+            if(txtSearchStudent.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Search Field is Empty!");
+                return;
+            }
+
             String enrollmentNumber = txtSearchStudent.getText();
             jTable = getSearchedTable(enrollmentNumber);
             new StudentTable(jTable,"Searched Student");
