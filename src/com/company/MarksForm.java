@@ -13,9 +13,10 @@ public class MarksForm extends JFrame {
     Vector<Integer> thv;
     Vector<Integer> prv;
     Vector<Integer> mtv;
+    Vector<String> cnv;
     Container c;
     JButton submit,update;
-    MarksForm(String programId,String enrollmentNumber,String departmentCode,int semester,int admissionYear,Vector<Integer> thv,Vector<Integer> prv,Vector<Integer> mtv){
+    MarksForm(String programId,String enrollmentNumber,String departmentCode,int semester,int admissionYear,Vector<Integer> thv,Vector<Integer> prv,Vector<Integer> mtv,Vector<String> cnv){
         super("Student Marks' Form");
         this.programId = programId;
         this.enrollmentNumber = enrollmentNumber;
@@ -25,6 +26,7 @@ public class MarksForm extends JFrame {
         this.thv = thv;
         this.prv = prv;
         this.mtv = mtv;
+        this.cnv = cnv;
         c = getContentPane();
         c.setLayout(null);
         Vector<String> courseNumber = new Vector<>();
@@ -46,6 +48,29 @@ public class MarksForm extends JFrame {
                 creditTh.add(rs.getInt(7));
                 creditPr.add(rs.getInt(8));
                 maxMT.add(rs.getInt(9));
+            }
+            if(cnv.size()>0){
+                Vector<String> cname = new Vector<>();
+                Vector<Integer> ctv = new Vector<>();
+                Vector<Integer> cpv = new Vector<>();
+                courseNumber.clear();
+                courseNumber.addAll(cnv);
+                for(String ele:courseNumber){
+                    PreparedStatement stmt1 = Main.con.prepareStatement("select course_name,credit_theory,credit_practical from schemeCourse where course_no=?");
+                    stmt1.setString(1,ele);
+                    ResultSet rs1 = stmt1.executeQuery();
+                    while(rs1.next()){
+                        cname.add(rs1.getString(1));
+                        ctv.add(rs1.getInt(2));
+                        cpv.add(rs1.getInt(3));
+                    }
+                }
+                courseName.clear();
+                courseName.addAll(cname);
+                creditTh.clear();
+                creditTh.addAll(ctv);
+                creditPr.clear();
+                creditPr.addAll(cpv);
             }
             int lblX=200,lblY=80,txtX=370,txtY=120,i=0,thX=300,thY=120;
             JTextField txtTheoryMarks,txtPracticalMarks,txtMidTermMarks;

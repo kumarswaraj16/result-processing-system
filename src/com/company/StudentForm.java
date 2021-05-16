@@ -148,6 +148,7 @@ public class StudentForm extends JFrame {
                 Vector<Integer> thv = new Vector<>();
                 Vector<Integer> prv = new Vector<>();
                 Vector<Integer> mtv = new Vector<>();
+                Vector<String> cnv = new Vector<>();
                 String programId = txtProgramId.getText();
                 String enrollmentNumber = txtEnrollNo.getText();
                 String departmentCode = txtDepartmentCode.getText();
@@ -161,15 +162,18 @@ public class StudentForm extends JFrame {
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
                     int theory,practical,mt;
+                    String cn;
+                    cn = rs.getString(2);
                     theory = rs.getInt(7);
                     practical = rs.getInt(8);
                     mt = rs.getInt(9);
                     thv.add(theory);
                     prv.add(practical);
                     mtv.add(mt);
+                    cnv.add(cn);
                 }
 
-                MarksForm mf = new MarksForm(programId,enrollmentNumber,departmentCode,semester,admissionYear,thv,prv,mtv);
+                MarksForm mf = new MarksForm(programId,enrollmentNumber,departmentCode,semester,admissionYear,thv,prv,mtv,cnv);
                 mf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 mf.setBounds(0,0,1500,1000);
                 mf.setVisible(true);
