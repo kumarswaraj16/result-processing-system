@@ -71,7 +71,7 @@ public class StudentResult extends JFrame {
                     fatherName = rs2.getString(6);
                 }
 
-                PreparedStatement stmt = Main.con.prepareStatement("select * from marks where enroll_no = ? and semester = ?");
+                PreparedStatement stmt = Main.con.prepareStatement("select * from marks where enroll_no = ? and semester = ? order by course_no");
                 stmt.setString(1,enrollmentNumber);
                 stmt.setInt(2,semester);
                 ResultSet rs = stmt.executeQuery();
@@ -90,34 +90,34 @@ public class StudentResult extends JFrame {
                     gradePoints.add(rs.getDouble(12));
                 }
 
-                if(courseNumber.size()>0){
-                    Vector<String> cname = new Vector<>();
-                    Vector<Integer> ctv = new Vector<>();
-                    Vector<Integer> cpv = new Vector<>();
-                    for(String ele:courseNumber) {
-                        PreparedStatement stmt1 = Main.con.prepareStatement("select course_name,credit_theory,credit_practical from schemeCourse where course_no=?");
-                        stmt1.setString(1, ele);
-                        ResultSet rs1 = stmt1.executeQuery();
-                        while (rs1.next()) {
-                            cname.add(rs1.getString(1));
-                            ctv.add(rs1.getInt(2));
-                            cpv.add(rs1.getInt(3));
-                        }
-                    }
-                    courseName.addAll(cname);
-                    creditTh.addAll(ctv);
-                    creditPr.addAll(cpv);
-                }
-
-//                PreparedStatement stmt1 = Main.con.prepareStatement("select * from schemeCourse where dept_code = ? and semester = ?");
-//                stmt1.setString(1,departmentCode);
-//                stmt1.setInt(2,semester);
-//                ResultSet rs1 = stmt1.executeQuery();
-//                while(rs1.next()){
-//                    courseName.add(rs1.getString(3));
-//                    creditTh.add(rs1.getInt(7));
-//                    creditPr.add(rs1.getInt(8));
+//                if(courseNumber.size()>0){
+//                    Vector<String> cname = new Vector<>();
+//                    Vector<Integer> ctv = new Vector<>();
+//                    Vector<Integer> cpv = new Vector<>();
+//                    for(String ele:courseNumber) {
+//                        PreparedStatement stmt1 = Main.con.prepareStatement("select course_name,credit_theory,credit_practical from schemeCourse where course_no=?");
+//                        stmt1.setString(1, ele);
+//                        ResultSet rs1 = stmt1.executeQuery();
+//                        while (rs1.next()) {
+//                            cname.add(rs1.getString(1));
+//                            ctv.add(rs1.getInt(2));
+//                            cpv.add(rs1.getInt(3));
+//                        }
+//                    }
+//                    courseName.addAll(cname);
+//                    creditTh.addAll(ctv);
+//                    creditPr.addAll(cpv);
 //                }
+
+                PreparedStatement stmt1 = Main.con.prepareStatement("select * from schemeCourse where dept_code = ? and semester = ? order by course_no");
+                stmt1.setString(1,departmentCode);
+                stmt1.setInt(2,semester);
+                ResultSet rs1 = stmt1.executeQuery();
+                while(rs1.next()){
+                    courseName.add(rs1.getString(3));
+                    creditTh.add(rs1.getInt(7));
+                    creditPr.add(rs1.getInt(8));
+                }
 
                 PreparedStatement stmt3 = Main.con.prepareStatement("select * from result where enroll_no = ? and semester = ?");
                 stmt3.setString(1,enrollmentNumber);

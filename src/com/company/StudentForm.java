@@ -155,7 +155,7 @@ public class StudentForm extends JFrame {
                 int semester = Integer.parseInt(txtCurrentSemester.getText());
                 int admissionYear = Integer.parseInt(txtAdmissionYear.getText());
 
-                PreparedStatement stmt = Main.con.prepareStatement("select * from marks where enroll_no=? and semester=? and dept_code=?");
+                PreparedStatement stmt = Main.con.prepareStatement("select * from marks where enroll_no=? and semester=? and dept_code=? order by course_no");
                 stmt.setString(1,enrollmentNumber);
                 stmt.setInt(2,semester);
                 stmt.setString(3,departmentCode);
