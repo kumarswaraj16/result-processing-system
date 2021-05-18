@@ -165,7 +165,7 @@ public class ResultDesign extends JFrame {
         for(String ele:courseNumber){
             cn = new JLabel(ele);
             cn.setFont(new Font("Arial",Font.PLAIN,17));
-            cn.setBounds(lblX,lblY,100,40);
+            cn.setBounds(lblX,lblY,200,40);
             c.add(cn);
             lblY=lblY+45;
         }
@@ -177,6 +177,7 @@ public class ResultDesign extends JFrame {
 
         int lblX1=175,lblY1=300;
         for(String ele:courseName){
+            //System.out.println(ele);
             cn = new JLabel(ele);
             cn.setFont(new Font("Arial",Font.PLAIN,17));
             cn.setBounds(lblX1,lblY1,400,40);

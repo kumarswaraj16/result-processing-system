@@ -160,6 +160,7 @@ public class StudentForm extends JFrame {
                 stmt.setInt(2,semester);
                 stmt.setString(3,departmentCode);
                 ResultSet rs = stmt.executeQuery();
+
                 while(rs.next()){
                     int theory,practical,mt;
                     String cn;
@@ -171,6 +172,17 @@ public class StudentForm extends JFrame {
                     prv.add(practical);
                     mtv.add(mt);
                     cnv.add(cn);
+                }
+
+                PreparedStatement st = Main.con.prepareStatement("select * from schemeCourse where schemeCourse.semester = ? and schemeCourse.dept_code = ? and schemeCourse.start_year = ? order by course_no");
+                st.setString(2,departmentCode);
+                st.setInt(1,semester);
+                st.setInt(3,admissionYear);
+
+                ResultSet resultSet = st.executeQuery();
+                if(!resultSet.next()){
+                    JOptionPane.showMessageDialog(null, "Semester has not done yet!");
+                    return;
                 }
 
                 MarksForm mf = new MarksForm(programId,enrollmentNumber,departmentCode,semester,admissionYear,thv,prv,mtv,cnv);

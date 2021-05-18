@@ -49,6 +49,9 @@ public class StudentResult extends JFrame {
             double sgpa=0.0,ogpa=0.0,totalCreditPoints=0.0,totalCreditPointsTillSemester=0.0;
             boolean flag = true;
 
+            String enrollNo = enrollmentNumber.substring(0,4);
+            int admissionYear = Integer.parseInt(enrollNo);
+
             Vector<String> courseNumber = new Vector<>();
             Vector<String> courseName = new Vector<>();
             Vector<Integer> subjectMarks = new Vector<>();
@@ -90,28 +93,10 @@ public class StudentResult extends JFrame {
                     gradePoints.add(rs.getDouble(12));
                 }
 
-//                if(courseNumber.size()>0){
-//                    Vector<String> cname = new Vector<>();
-//                    Vector<Integer> ctv = new Vector<>();
-//                    Vector<Integer> cpv = new Vector<>();
-//                    for(String ele:courseNumber) {
-//                        PreparedStatement stmt1 = Main.con.prepareStatement("select course_name,credit_theory,credit_practical from schemeCourse where course_no=?");
-//                        stmt1.setString(1, ele);
-//                        ResultSet rs1 = stmt1.executeQuery();
-//                        while (rs1.next()) {
-//                            cname.add(rs1.getString(1));
-//                            ctv.add(rs1.getInt(2));
-//                            cpv.add(rs1.getInt(3));
-//                        }
-//                    }
-//                    courseName.addAll(cname);
-//                    creditTh.addAll(ctv);
-//                    creditPr.addAll(cpv);
-//                }
-
-                PreparedStatement stmt1 = Main.con.prepareStatement("select * from schemeCourse where dept_code = ? and semester = ? order by course_no");
+                PreparedStatement stmt1 = Main.con.prepareStatement("select * from schemeCourse where dept_code = ? and semester = ? and start_year = ? order by course_no");
                 stmt1.setString(1,departmentCode);
                 stmt1.setInt(2,semester);
+                stmt1.setInt(3,admissionYear);
                 ResultSet rs1 = stmt1.executeQuery();
                 while(rs1.next()){
                     courseName.add(rs1.getString(3));

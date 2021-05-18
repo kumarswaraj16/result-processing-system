@@ -117,9 +117,13 @@ public class ResultForm extends JFrame {
                     gradePoints.add(rs.getDouble(12));
                 }
 
-                PreparedStatement stmt1 = Main.con.prepareStatement("select * from schemeCourse where dept_code = ? and semester = ?");
+                String enrollNo = enrollmentNumber.substring(0,4);
+                int admissionYear = Integer.parseInt(enrollNo);
+
+                PreparedStatement stmt1 = Main.con.prepareStatement("select * from schemeCourse where dept_code = ? and semester = ? and start_year = ? order by course_no");
                 stmt1.setString(1,departmentCode);
                 stmt1.setInt(2,semester);
+                stmt1.setInt(3,admissionYear);
                 ResultSet rs1 = stmt1.executeQuery();
                 while(rs1.next()){
                     creditTh.add(rs1.getInt(7));
@@ -204,6 +208,9 @@ public class ResultForm extends JFrame {
             String departmentCode=null;
             boolean flag = true;
 
+            String enrollNo = enrollmentNumber.substring(0,4);
+            int admissionYear = Integer.parseInt(enrollNo);
+
             Vector<String> courseNumber = new Vector<>();
             Vector<Integer> subjectMarks = new Vector<>();
             Vector<Integer> theoryMarks = new Vector<>();
@@ -233,9 +240,10 @@ public class ResultForm extends JFrame {
                     gradePoints.add(rs.getDouble(12));
                 }
 
-                PreparedStatement stmt1 = Main.con.prepareStatement("select * from schemeCourse where dept_code = ? and semester = ?");
+                PreparedStatement stmt1 = Main.con.prepareStatement("select * from schemeCourse where dept_code = ? and semester = ? and start_year = ? order by course_no");
                 stmt1.setString(1,departmentCode);
                 stmt1.setInt(2,semester);
+                stmt1.setInt(3,admissionYear);
                 ResultSet rs1 = stmt1.executeQuery();
                 while(rs1.next()){
                     creditTh.add(rs1.getInt(7));

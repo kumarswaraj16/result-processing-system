@@ -38,9 +38,10 @@ public class MarksForm extends JFrame {
         Vector<Integer> creditPr = new Vector<>();
         Vector<Integer> maxMT = new Vector<>();
         try {
-            PreparedStatement stmt = Main.con.prepareStatement("select * from schemeCourse where schemeCourse.semester = ? and schemeCourse.dept_code = ? order by course_no");
+            PreparedStatement stmt = Main.con.prepareStatement("select * from schemeCourse where schemeCourse.semester = ? and schemeCourse.dept_code = ? and schemeCourse.start_year = ? order by course_no");
             stmt.setInt(1,semester);
             stmt.setString(2,departmentCode);
+            stmt.setInt(3,admissionYear);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 courseNumber.add(rs.getString(2));
@@ -49,29 +50,6 @@ public class MarksForm extends JFrame {
                 creditPr.add(rs.getInt(8));
                 maxMT.add(rs.getInt(9));
             }
-//            if(cnv.size()>0){
-//                Vector<String> cname = new Vector<>();
-//                Vector<Integer> ctv = new Vector<>();
-//                Vector<Integer> cpv = new Vector<>();
-//                courseNumber.clear();
-//                courseNumber.addAll(cnv);
-//                for(String ele:courseNumber){
-//                    PreparedStatement stmt1 = Main.con.prepareStatement("select course_name,credit_theory,credit_practical from schemeCourse where course_no=?");
-//                    stmt1.setString(1,ele);
-//                    ResultSet rs1 = stmt1.executeQuery();
-//                    while(rs1.next()){
-//                        cname.add(rs1.getString(1));
-//                        ctv.add(rs1.getInt(2));
-//                        cpv.add(rs1.getInt(3));
-//                    }
-//                }
-//                courseName.clear();
-//                courseName.addAll(cname);
-//                creditTh.clear();
-//                creditTh.addAll(ctv);
-//                creditPr.clear();
-//                creditPr.addAll(cpv);
-//            }
             int lblX=200,lblY=80,txtX=370,txtY=120,i=0,thX=300,thY=120;
             JTextField txtTheoryMarks,txtPracticalMarks,txtMidTermMarks;
             JLabel lblCourseDetails,lblTh,lblPr,lblMt;
@@ -151,10 +129,6 @@ public class MarksForm extends JFrame {
             submit.setEnabled(false);
         }else{
             update.setEnabled(false);
-        }
-
-        if(theoryMarks.size()==0 && practicalMarks.size()==0 && midtermMarks.size()==0){
-            finish();
         }
 
         submit.addActionListener(e -> {
@@ -287,9 +261,4 @@ public class MarksForm extends JFrame {
         });
     }
 
-    public void finish(){
-        JOptionPane.showMessageDialog(null,"Semester has not done yet!");
-        submit.setEnabled(false);
-        update.setEnabled(false);
-    }
 }
